@@ -1,63 +1,29 @@
 apply plugin: 'com.android.library'
 apply plugin: 'maven-publish'
 
-ext {
-    bintrayRepo = 'maven'
-    bintrayName = 'android-pdf-viewer'
 
-    publishedGroupId = 'com.github.barteksc'
-    libraryName = 'AndroidPdfViewer'
-    artifact = 'android-pdf-viewer'
-
-    libraryDescription = 'Android view for displaying PDFs rendered with PdfiumAndroid'
-
-    siteUrl = 'https://github.com/barteksc/AndroidPdfViewer'
-    gitUrl = 'https://github.com/barteksc/AndroidPdfViewer.git'
-
-    libraryVersion = '3.2.0-beta.1'
-
-    developerId = 'barteksc'
-    developerName = 'Bartosz Schiller'
-    developerEmail = 'barteksch@boo.pl'
-
-    licenseName = 'The Apache Software License, Version 2.0'
-    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-    allLicenses = ["Apache-2.0"]
-}
 
 android {
-    compileSdkVersion 32
+    namespace 'com.github.barteksc.pdfviewer'
+    compileSdk 35
 
     defaultConfig {
-        minSdkVersion 14
-        targetSdk 32
+        minSdk 21
+        targetSdk 35
         versionCode 1
         versionName "3.2.0-beta.1"
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
 }
 
-repositories {
-    mavenLocal()
-    maven {
-        url "https://repo.itextsupport.com/android"
-    }
-}
+
 dependencies {
-    implementation 'androidx.core:core:1.7.0'
-    implementation 'com.itextpdf.android.pdfium:pdfium-android:1.9.0'
+    implementation 'androidx.core:core:1.16.0'
+    implementation project(':PdfiumAndroid')
 }
 
-project.afterEvaluate {
-    publishing {
-        publications {
-            library(MavenPublication) {
-                groupId = 'com.itextpdf.android.pdfviewer'
-                artifactId = 'android-pdf-viewer'
-                version = android.defaultConfig.versionName
-
-                artifact bundleReleaseAar
-            }
-        }
-    }
-}
