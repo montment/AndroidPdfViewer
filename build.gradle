@@ -1,7 +1,14 @@
-plugins {
-    id 'com.android.library'
-    id 'org.jetbrains.kotlin.android'
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.7.3'
+    }
 }
+apply plugin: 'com.android.library'
 
 android {
     namespace 'com.github.barteksc.pdfviewer'
@@ -42,3 +49,4 @@ dependencies {
     implementation 'com.tencent.mars:mars-xlog:1.2.6'
     implementation project(':PdfiumAndroid')
 }
+
